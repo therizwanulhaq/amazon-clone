@@ -5,14 +5,14 @@ import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
 
-class PostsScreen extends StatefulWidget {
-  const PostsScreen({super.key});
+class ProductScreen extends StatefulWidget {
+  const ProductScreen({super.key});
 
   @override
-  State<PostsScreen> createState() => _PostsScreenState();
+  State<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _PostsScreenState extends State<PostsScreen> {
+class _ProductScreenState extends State<ProductScreen> {
   List<Product>? products;
   final AdminServices adminServices = AdminServices();
 
