@@ -1,5 +1,9 @@
+import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/account/services/account_services.dart';
 import 'package:amazon_clone/features/account/widgets/single-product.dart';
+import 'package:amazon_clone/features/order_details/screens/order_details.dart';
+import 'package:amazon_clone/models/order.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -10,65 +14,82 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  // temporary list
-  List list = [
-    'https://images.unsplash.com/photo-1676668459993-cc6279d46756?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60',
-    'https://plus.unsplash.com/premium_photo-1661765908459-e51784379331?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60',
-    'https://images.unsplash.com/photo-1648737154448-ccf0cafae1c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MjR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-    'https://images.unsplash.com/photo-1648737154448-ccf0cafae1c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MjR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-  ];
+  List<Order>? orders;
+  final AccountServices accountServices = AccountServices();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
+
+  void fetchOrders() async {
+    orders = await accountServices.fetchUserOrders(context: context);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(
-                left: 15,
+    return orders == null
+        ? const Loader()
+        : Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                    ),
+                    child: const Text(
+                      'Your Orders',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      right: 15,
+                    ),
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                        color: GlobalVariables.selectedNavBarColor,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: const Text(
-                'Your Orders',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+              // display orders
+              Container(
+                height: 170,
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 20,
+                  right: 0,
+                ),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: orders!.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          OrderDetailScreen.routeName,
+                          arguments: orders![index],
+                        );
+                      },
+                      child: SingleProduct(
+                        image: orders![index].products[0].images[0],
+                      ),
+                    );
+                  },
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                right: 15,
-              ),
-              child: Text(
-                'See all',
-                style: TextStyle(
-                  color: GlobalVariables.selectedNavBarColor,
-                ),
-              ),
-            ),
-          ],
-        ),
-        // display orders
-        Container(
-          height: 170,
-          padding: const EdgeInsets.only(
-            left: 10,
-            top: 20,
-            right: 0,
-          ),
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              return SingleProduct(
-                image: list[index],
-              );
-            },
-          ),
-        ),
-      ],
-    );
+            ],
+          );
   }
 }
