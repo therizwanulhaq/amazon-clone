@@ -25,7 +25,7 @@ class SearchServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(

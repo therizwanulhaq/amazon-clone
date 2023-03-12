@@ -55,7 +55,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           showSnackBar(context, 'Product Added Successfully!');
           Navigator.pop(context);
@@ -79,7 +79,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
@@ -120,7 +120,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           onSuccess();
         },
@@ -142,7 +142,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             orderList.add(
@@ -185,7 +185,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: onSuccess,
       );
     } catch (e) {
@@ -206,7 +206,7 @@ class AdminServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           var response = jsonDecode(res.body);
           totalEarnings = response['totalEarnings'];

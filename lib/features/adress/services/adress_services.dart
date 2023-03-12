@@ -30,7 +30,7 @@ class AdressServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           User user = userProvider.user.copyWith(
             adress: jsonDecode(res.body)['adress'],
@@ -65,7 +65,7 @@ class AdressServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           showSnackBar(context, 'Your order has been placed!');
           User user = userProvider.user.copyWith(
@@ -101,7 +101,7 @@ class AdressServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           onSuccess();
         },

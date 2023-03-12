@@ -28,7 +28,7 @@ class CartServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           User user =
               userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);

@@ -31,7 +31,7 @@ class ProductDetailServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           User user =
               userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
@@ -65,7 +65,7 @@ class ProductDetailServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {},
       );
     } catch (e) {

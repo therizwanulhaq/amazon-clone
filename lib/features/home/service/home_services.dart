@@ -25,7 +25,7 @@ class HomeServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
@@ -66,7 +66,7 @@ class HomeServices {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           product = Product.fromJson(res.body);
         },

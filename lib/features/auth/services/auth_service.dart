@@ -41,7 +41,7 @@ class AuthService {
 
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () {
           showSnackBar(
             context,
@@ -73,7 +73,7 @@ class AuthService {
       );
       httpErrorHandle(
         response: res,
-        context: context,
+        context: (context),
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>((context), listen: false).setUser(res.body);
