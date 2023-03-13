@@ -218,6 +218,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               child: CustomButton(
                 text: 'Buy Now',
                 onTap: () {},
+                color: Colors.orange[400],
               ),
             ),
             const SizedBox(height: 10),
